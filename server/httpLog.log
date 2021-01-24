@@ -1,0 +1,12 @@
+2021-01-24 19:42:03 [httpLog] {"method":"GET","url":"/api/currentUser","data":{},"startTime":"2021-01-24 19:42:03","endTime":"2021-01-24 19:42:03","timeLength":1}
+2021-01-24 22:00:03 [httpLog] {"method":"GET","url":"/","data":{},"startTime":"2021-01-24 22:00:03","endTime":"2021-01-24 22:00:03","timeLength":2}
+2021-01-24 22:00:08 [httpLog] {"method":"GET","url":"/login","data":{},"startTime":"2021-01-24 22:00:08","endTime":"2021-01-24 22:00:08","timeLength":0}
+2021-01-24 22:00:15 [httpLog] {"method":"GET","url":"/api/user/login","data":{},"startTime":"2021-01-24 22:00:15","endTime":"2021-01-24 22:00:15","timeLength":0}
+2021-01-24 22:00:20 [httpLog] {"method":"GET","url":"/api/user/login","data":{},"startTime":"2021-01-24 22:00:20","endTime":"2021-01-24 22:00:20","timeLength":0}
+2021-01-24 23:28:44 [httpLog] {"method":"POST","url":"/api/user/register","data":{"username":"admin","password":"1234"},"startTime":"2021-01-24 23:28:44","endTime":"2021-01-24 23:28:44","timeLength":72}
+2021-01-24 23:30:04 [httpLog] {"method":"GET","url":"/api/currentUser","data":{},"startTime":"2021-01-24 23:30:04","endTime":"2021-01-24 23:30:04","timeLength":0}
+2021-01-24 23:30:16 [httpLog] {"method":"POST","url":"/api/user/login","data":{"username":"admin","password":"1234","autoLogin":true},"startTime":"2021-01-24 23:30:16","endTime":"2021-01-24 23:30:16","timeLength":12}
+2021-01-24 23:30:23 [httpLog] {"method":"POST","url":"/api/user/login","data":{"username":"admin","password":"12344","autoLogin":true},"startTime":"2021-01-24 23:30:23","endTime":"2021-01-24 23:30:23","timeLength":3}
+2021-01-24 23:35:34 [httpLog] {"method":"POST","url":"/api/user/login","data":{"username":"admin","password":"12344","autoLogin":true},"startTime":"2021-01-24 23:35:34","endTime":"2021-01-24 23:35:34","timeLength":11}
+2021-01-24 23:35:39 [httpLog] {"method":"POST","url":"/api/user/login","data":{"username":"admin","password":"1234","autoLogin":true},"startTime":"2021-01-24 23:35:39","endTime":"2021-01-24 23:35:39","timeLength":9}
+2021-01-24 23:41:23 [httpLog] {"method":"POST","url":"/api/user/login","data":{"username":"admin","password":"1234"},"startTime":"2021-01-24 23:41:23","endTime":"2021-01-24 23:41:23","timeLength":22}
