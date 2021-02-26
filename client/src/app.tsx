@@ -6,8 +6,8 @@ import type { RequestConfig, RunTimeLayoutConfig } from 'umi';
 import { history } from 'umi';
 import RightContent from '@/components/RightContent';
 import Footer from '@/components/Footer';
-import type { ResponseError } from 'umi-request';
-import { queryCurrent } from './services/user';
+import type { RequestOptionsInit, ResponseError } from 'umi-request';
+import { localStorage } from './utils/storage.js';
 
 /** 获取用户信息比较慢的时候会展示一个 loading */
 export const initialStateConfig = {
@@ -21,7 +21,8 @@ export async function getInitialState(): Promise<{
 }> {
   const fetchUserInfo = async () => {
     try {
-      const currentUser = await queryCurrent();
+      const currentUser = localStorage.getItem('user') as API.CurrentUser;
+      console.log(currentUser);
       return currentUser;
     } catch (error) {
       history.push('/user/login');
@@ -103,6 +104,13 @@ const errorHandler = (error: ResponseError) => {
   throw error;
 };
 
+const demoResponseInterceptors = (response: Response, options: RequestOptionsInit) => {
+  console.log(response, options);
+
+  return response;
+};
+
 export const request: RequestConfig = {
   errorHandler,
+  responseInterceptors: [demoResponseInterceptors],
 };

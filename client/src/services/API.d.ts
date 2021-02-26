@@ -1,22 +1,26 @@
 declare namespace API {
+  export interface AppResponse<T = any> {
+    code: string;
+    data: T;
+    message: string | null;
+    success: boolean;
+    event: string | null;
+  }
   export type CurrentUser = {
     avatar?: string;
-    name?: string;
-    title?: string;
-    group?: string;
-    signature?: string;
-    tags?: {
-      key: string;
-      label: string;
-    }[];
-    userid?: string;
-    access?: 'user' | 'guest' | 'admin';
-    unreadCount?: number;
+    createTime?: number;
+    id: number;
+    phone: number;
+    sign: number;
+    token: string;
+    updateTime: number;
+    username: string;
   };
 
   export type LoginStateType = {
-    status?: 'ok' | 'error';
+    status?: any;
     type?: string;
+    data?: any;
   };
 
   export type NoticeIconData = {

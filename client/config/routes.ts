@@ -22,6 +22,12 @@
     component: './Welcome',
   },
   {
+    path: '/kol',
+    name: 'kolytb',
+    icon: 'smile',
+    component: './Kol',
+  },
+  {
     path: '/admin',
     name: 'admin',
     icon: 'crown',

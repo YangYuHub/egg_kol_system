@@ -1,19 +1,11 @@
-import {
-  AlipayCircleOutlined,
-  LockOutlined,
-  MobileOutlined,
-  TaobaoCircleOutlined,
-  UserOutlined,
-  WeiboCircleOutlined,
-} from '@ant-design/icons';
-import { Alert, Space, message, Tabs } from 'antd';
+import { LockOutlined, UserOutlined } from '@ant-design/icons';
+import { Alert, message } from 'antd';
 import React, { useState } from 'react';
-import ProForm, { ProFormCaptcha, ProFormCheckbox, ProFormText } from '@ant-design/pro-form';
+import ProForm, { ProFormText } from '@ant-design/pro-form';
 import { useIntl, Link, history, FormattedMessage, SelectLang, useModel } from 'umi';
 import Footer from '@/components/Footer';
-import { loginAsync, LoginParamsType, LoginType } from '@/services/login';
-import { fakeAccountLogin, getFakeCaptcha } from '@/services/login';
-
+import { loginAsync, LoginType } from '@/services/login';
+import { localStorage } from '../../../utils/storage.js';
 import styles from './index.less';
 
 const LoginMessage: React.FC<{
@@ -57,12 +49,14 @@ const Login: React.FC = () => {
     }
   };
 
-  const handleSubmit = async (values: LoginType) => {
+  const handleSubmit = async (values: LoginType): Promise<void> => {
     setSubmitting(true);
     try {
       // 登录
       const msg = await loginAsync({ ...values });
-      if (msg.status === 'ok') {
+      console.log(msg);
+      if (msg.status === 200) {
+        localStorage.setItem('user', msg.data);
         message.success('登录成功！');
         await fetchUserInfo();
         goto();
