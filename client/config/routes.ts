@@ -28,6 +28,12 @@
     component: './Kol',
   },
   {
+    path: '/setting',
+    name: 'setting',
+    icon: 'smile',
+    component: './Setting',
+  },
+  {
     path: '/admin',
     name: 'admin',
     icon: 'crown',
