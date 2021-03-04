@@ -24,7 +24,6 @@ class CelebrityController extends BaseController {
                 this.error('add失败');
             }
         }
-
     }
 }
 

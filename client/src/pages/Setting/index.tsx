@@ -3,25 +3,28 @@ import {
   CelebrityParamType,
   CelebrityResultType,
   KolParams,
-  kol_list,
+  getKols,
+  login,
 } from '@/services/celebrity';
 import { PageContainer } from '@ant-design/pro-layout';
-import { Avatar, Badge, Button, Card, Col, List, Progress, Row, Skeleton } from 'antd';
+import { Avatar, Badge, Button, Card, Col, List, message, Progress, Row, Skeleton } from 'antd';
 import React, { useState } from 'react';
 import styles from './index.less';
 
 const Setting: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [kolPercent, setKolPercent] = useState(0);
+  const [onKol, setOnKol] = useState(false);
   const [params, setParams] = useState<KolParams>({
     page: 1,
     per_page: 40,
   } as KolParams);
 
   const onKolSearch = async () => {
-    const res: any = await kol_list(params);
+    const res: any = await getKols(params);
     if (res.status === 'success') {
       res.data.data.forEach((item: CelebrityResultType) => editCelebrity(item, res.data));
+      setParams({ page: params.page++ } as KolParams);
     }
   };
 
@@ -30,34 +33,45 @@ const Setting: React.FC = () => {
       await addCelebrity(param);
       setKolPercent(((res.total - params.per_page) / res.total) * 100);
       if (res.current_page <= res.last_page) {
-        await onKolSearch();
+        setTimeout(() => {
+          console.log(res.current_page);
+          onKolSearch();
+        }, 3000);
+      } else {
+        setOnKol(false);
       }
     } catch (error) {}
   };
 
-  const onClick = (item: string) => {
+  const onClick = async (item: string) => {
     switch (item) {
       case 'Kol':
-        onKolSearch();
+        console.log(localStorage.getItem('kol_token'));
+        if (localStorage.getItem('kol_token')) {
+          setOnKol(true);
+          onKolSearch();
+        } else {
+          const res = await onLogin();
+          res && onKolSearch();
+        }
         break;
     }
   };
-  (603400 - 40) / 603400;
+
+  const onLogin = async () => {
+    const res = await login({ username: 'jennie', password: 'jennie321' });
+    if (res.status === 200) {
+      localStorage.setItem('kol_token', res.data.token);
+      return true;
+    } else {
+      message.error('login error');
+      return false;
+    }
+  };
 
   return (
     <PageContainer>
       <div className={styles.container}>
-        <Card>
-          <Row>
-            <Col span={2}>
-              <Button type="primary">get Token</Button>
-            </Col>
-            <Col style={{ display: 'flex', alignItems: 'center' }}>
-              <Badge status="success" />
-              login success
-            </Col>
-          </Row>
-        </Card>
         <Card style={{ marginTop: '24px' }}>
           <List
             className="demo-loadmore-list"
@@ -71,10 +85,14 @@ const Setting: React.FC = () => {
             renderItem={(item) => (
               <List.Item
                 actions={[
-                  <a key="list-loadmore-edit" onClick={() => onClick(item.title)}>
-                    开始
-                  </a>,
-                  <a key="list-loadmore-more">暂停</a>,
+                  <Button
+                    key="list-loadmore-edit"
+                    type={'link'}
+                    disabled={onKol}
+                    onClick={() => onClick(item.title)}
+                  >
+                    {onKol ? '正在爬取...' : '开始'}
+                  </Button>,
                 ]}
               >
                 <List.Item.Meta

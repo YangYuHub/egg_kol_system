@@ -1,7 +1,7 @@
 import React from 'react';
 import type { Settings as LayoutSettings } from '@ant-design/pro-layout';
 import { PageLoading } from '@ant-design/pro-layout';
-import { notification } from 'antd';
+import { message, notification } from 'antd';
 import type { RequestConfig, RunTimeLayoutConfig } from 'umi';
 import { history } from 'umi';
 import RightContent from '@/components/RightContent';
@@ -104,13 +104,41 @@ const errorHandler = (error: ResponseError) => {
   throw error;
 };
 
-const demoResponseInterceptors = (response: Response, options: RequestOptionsInit) => {
-  console.log(response, options);
+const authHeaderInterceptor = (url: string, options: RequestOptionsInit) => {
+  //判断不需要传token的接口
 
-  return response;
+  const ignorePathList = ['/api/user/login'];
+  console.log(url, REACT_APP_ENV, UMI_ENV);
+  if (!ignorePathList.includes(url)) {
+    const authHeader = { Authorization: 'Bearer ' + sessionStorage.getItem('token') ?? '' };
+    return {
+      url: `${API_URL}${url}`,
+      options: { ...options, interceptors: true, headers: authHeader },
+    };
+  } else {
+    return {
+      url: `${API_URL}${url}`,
+      options: { ...options },
+    };
+  }
 };
 
 export const request: RequestConfig = {
   errorHandler,
-  responseInterceptors: [demoResponseInterceptors],
+  requestInterceptors: [authHeaderInterceptor],
+  //响应后拦截
+  responseInterceptors: [
+    // @ts-ignore
+    async (response) => {
+      const resp = await response.clone().json();
+      debugger;
+      let res: API.AppResponse = resp ? { data: true, code: '0000', success: true } : resp;
+      if (res.code !== '0000') {
+        //校验不需要全局错误提示的code
+        return Promise.reject(res);
+      }
+      res.success && res.data === null && (res = { ...res, data: true });
+      return res;
+    },
+  ],
 };

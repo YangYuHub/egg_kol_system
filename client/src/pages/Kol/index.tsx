@@ -7,7 +7,7 @@ import {
   CelebrityResultType,
   KolParams,
   kol_list,
-  kol_login,
+  login,
 } from '@/services/celebrity';
 import {
   Button,
@@ -78,7 +78,7 @@ const Kol: React.FC = () => {
   console.log(history.location.search);
 
   const onLogin = async () => {
-    const res: any = await kol_login({ username: 'jennie', password: 'jennie321' });
+    const res: any = await login({ username: 'jennie', password: 'jennie321' });
     if (res.status == 'success') {
       localStorage.setItem('kol_token', res.data.token);
     } else {
@@ -118,7 +118,7 @@ const Kol: React.FC = () => {
   const onFinish = (values: any) => {
     console.log('Received values of form: ', values);
   };
-  
+
   const getFields = () => {
     return (
       <>
