@@ -2,7 +2,7 @@
  * 网络请求配置
  */
 import axios from 'axios';
-import { localStorage } from '../utils/storage';
+// import { localStorage } from '../utils/storage';
 
 axios.defaults.timeout = 100000;
 axios.defaults.baseURL = 'https://api.kolzhipin.com';
@@ -13,9 +13,8 @@ axios.defaults.baseURL = 'https://api.kolzhipin.com';
 axios.interceptors.request.use(
   (config) => {
     config.data = JSON.stringify(config.data);
-    console.log(config);
-
     const token = localStorage.getItem('kol_token');
+    console.log(token);
     config.headers = {
       'Content-Type': 'application/json',
       'x-access-token': token,

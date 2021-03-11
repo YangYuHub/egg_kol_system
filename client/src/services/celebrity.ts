@@ -75,20 +75,20 @@ export function kol_list(params: KolParams) {
 }
 
 export function login(params: LoginType) {
-  return request<API.LoginStateType>('/api/public/login', {
+  return request<API.LoginStateType>('api/public/login', {
     method: 'POST',
     data: params,
   });
 }
 export function getKols(params: KolParams) {
-  return request<CelebrityResultType>('/api/public/getKols', {
-    method: 'GET',
+  return request<API.AppResponse<CelebrityResultType[]>>('api/public/getKols', {
+    method: 'POST',
     data: params,
   });
 }
 
 export function addCelebrity(params: CelebrityParamType) {
-  return request<API.LoginStateType>('/api/celebrity/add', {
+  return request<API.LoginStateType>('api/celebrity/add', {
     method: 'POST',
     data: params,
   });

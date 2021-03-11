@@ -120,11 +120,11 @@ export const localStorage = {
             let val = this.getItem(module_name);
             if (val) return val[key];
         }
-
         return this.getStorage()[key];
     },
     //  获取浏览器中的缓存信息
     getStorage() {
+        console.log(JSON.parse(window.localStorage.getItem(STORAGE_KEY) || '{}'))
         return JSON.parse(window.localStorage.getItem(STORAGE_KEY) || '{}');
     },
     remove: function(key) {

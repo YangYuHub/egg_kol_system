@@ -29,7 +29,7 @@ export async function outLogin() {
 }
 
 export function loginAsync(params: LoginType) {
-  return request<API.LoginStateType>('/api/user/login', {
+  return request<API.LoginStateType>('api/user/login', {
     method: 'POST',
     data: params,
   });

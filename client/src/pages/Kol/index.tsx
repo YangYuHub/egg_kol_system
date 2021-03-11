@@ -77,22 +77,6 @@ const Kol: React.FC = () => {
   const [form] = Form.useForm();
   console.log(history.location.search);
 
-  const onLogin = async () => {
-    const res: any = await login({ username: 'jennie', password: 'jennie321' });
-    if (res.status == 'success') {
-      localStorage.setItem('kol_token', res.data.token);
-    } else {
-      message.error('login error');
-    }
-  };
-
-  const onSearch = async () => {
-    const res: any = await kol_list(params);
-    if (res.status === 'success') {
-      setDatas(res.data.data);
-    }
-  };
-
   useEffect(() => {
     datas.forEach((item: CelebrityParamType) => {
       // handleAdd(item);
@@ -103,17 +87,6 @@ const Kol: React.FC = () => {
     // onLogin();
     // onSearch();
   }, []);
-
-  /**
-   * 添加节点
-   */
-  const handleAdd = async (param: CelebrityParamType) => {
-    try {
-      await addCelebrity(param);
-    } catch (error) {
-      message.error('添加失败请重试！');
-    }
-  };
 
   const onFinish = (values: any) => {
     console.log('Received values of form: ', values);

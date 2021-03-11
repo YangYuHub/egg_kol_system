@@ -4,6 +4,7 @@ const Controller = require('egg').Controller;
 const BaseController = require('./base');
 
 class PublicController extends BaseController {
+
     //login
     async login() {
         const { ctx } = this;
@@ -11,6 +12,7 @@ class PublicController extends BaseController {
         const result = await ctx.service.public.login(parmas);
         if (result) {
             this.success({ ctx, ...result.data.data });
+            return true;
         } else {
             this.error('login失败');
         }

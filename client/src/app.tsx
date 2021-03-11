@@ -107,10 +107,10 @@ const errorHandler = (error: ResponseError) => {
 const authHeaderInterceptor = (url: string, options: RequestOptionsInit) => {
   //判断不需要传token的接口
 
-  const ignorePathList = ['/api/user/login'];
-  console.log(url, REACT_APP_ENV, UMI_ENV);
+  const ignorePathList = ['api/user/login', 'api/public/login', 'api/public/getKols'];
   if (!ignorePathList.includes(url)) {
-    const authHeader = { Authorization: 'Bearer ' + sessionStorage.getItem('token') ?? '' };
+    const currentUser = localStorage.getItem('user') as API.CurrentUser;
+    const authHeader = { Authorization: 'Bearer ' + currentUser.token };
     return {
       url: `${API_URL}${url}`,
       options: { ...options, interceptors: true, headers: authHeader },
@@ -128,17 +128,12 @@ export const request: RequestConfig = {
   requestInterceptors: [authHeaderInterceptor],
   //响应后拦截
   responseInterceptors: [
-    // @ts-ignore
     async (response) => {
       const resp = await response.clone().json();
-      debugger;
-      let res: API.AppResponse = resp ? { data: true, code: '0000', success: true } : resp;
-      if (res.code !== '0000') {
-        //校验不需要全局错误提示的code
-        return Promise.reject(res);
+      if (resp.status !== 200) {
+        return Promise.reject(resp);
       }
-      res.success && res.data === null && (res = { ...res, data: true });
-      return res;
+      return resp;
     },
   ],
 };

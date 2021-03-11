@@ -9,13 +9,12 @@ const { UMI_ENV } = process.env;
 //  Url
 const url = {
   dev: 'http://127.0.0.1:7001',
-  pre: 'https://pre.8jsj.cn/',
-  test: 'https://test.8jsj.cn/',
-  idc: 'https://idc.8jsj.cn/',
 };
 
 export default defineConfig({
   define: {
-    API_URL: url[UMI_ENV!],
+    API_URL: 'http://localhost:8001/', // API地址
+    API_SECRET_KEY: 'kol', // API调用密钥
+    REACT_APP_ENV: 'dev',
   },
 });

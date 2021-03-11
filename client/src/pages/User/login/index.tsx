@@ -54,7 +54,6 @@ const Login: React.FC = () => {
     try {
       // 登录
       const msg = await loginAsync({ ...values });
-      console.log(msg);
       if (msg.status === 200) {
         localStorage.setItem('user', msg.data);
         message.success('登录成功！');

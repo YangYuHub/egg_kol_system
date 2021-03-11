@@ -1,10 +1,8 @@
 declare namespace API {
   export interface AppResponse<T = any> {
-    code: string;
+    status: number;
     data: T;
-    message: string | null;
-    success: boolean;
-    event: string | null;
+    errMsg?: string;
   }
   export type CurrentUser = {
     avatar?: string;

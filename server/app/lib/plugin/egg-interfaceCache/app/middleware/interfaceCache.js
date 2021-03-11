@@ -4,21 +4,20 @@
  * 3，没有缓存，将接口返回结果保存到redis中
  */
 module.exports = options => {
-  return async (ctx, next) => {
-    const { url } = ctx.request;
-    const cahce = await ctx.app.redis.get(url);
+    return async(ctx, next) => {
+        const { url } = ctx.request;
+        const cahce = await ctx.app.redis.get(url);
 
-    if(options.include.includes(url)){
-      if(cahce){
-        ctx.body = JSON.parse(cahce);
-        return;
-      }else {
-        await next();
-        await ctx.app.redis.set(url, JSON.stringify(ctx.response.body), 'EX', 8);
-      }
-    }else {
-      await next();
+        if (options.include.includes(url)) {
+            if (cahce) {
+                ctx.body = JSON.parse(cahce);
+                return;
+            } else {
+                await next();
+                await ctx.app.redis.set(url, JSON.stringify(ctx.response.body), 'EX', 8);
+            }
+        } else {
+            await next();
+        }
     }
-    
-  }
 }

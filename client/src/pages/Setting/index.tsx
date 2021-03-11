@@ -5,6 +5,7 @@ import {
   KolParams,
   getKols,
   login,
+  kol_list,
 } from '@/services/celebrity';
 import { PageContainer } from '@ant-design/pro-layout';
 import { Avatar, Badge, Button, Card, Col, List, message, Progress, Row, Skeleton } from 'antd';
@@ -21,11 +22,19 @@ const Setting: React.FC = () => {
   } as KolParams);
 
   const onKolSearch = async () => {
-    const res: any = await getKols(params);
-    if (res.status === 'success') {
-      res.data.data.forEach((item: CelebrityResultType) => editCelebrity(item, res.data));
+    const res = await getKols(params);
+    if (res.data) {
+      res.data.forEach((item: CelebrityResultType) => editCelebrity(item, res.data));
       setParams({ page: params.page++ } as KolParams);
     }
+  };
+
+  const onKolList = async () => {
+    const res = await kol_list(params);
+    console.log(res);
+    if (res) {
+    }
+    // await addCelebrity(param);
   };
 
   const editCelebrity = async (param: CelebrityParamType, res: any) => {
@@ -33,10 +42,10 @@ const Setting: React.FC = () => {
       await addCelebrity(param);
       setKolPercent(((res.total - params.per_page) / res.total) * 100);
       if (res.current_page <= res.last_page) {
-        setTimeout(() => {
-          console.log(res.current_page);
-          onKolSearch();
-        }, 3000);
+        // setTimeout(() => {
+        console.log(res.current_page);
+        onKolSearch();
+        // }, 3000);
       } else {
         setOnKol(false);
       }
@@ -46,13 +55,15 @@ const Setting: React.FC = () => {
   const onClick = async (item: string) => {
     switch (item) {
       case 'Kol':
-        console.log(localStorage.getItem('kol_token'));
+        console.log(localStorage.getItem('kol_token'), 1);
         if (localStorage.getItem('kol_token')) {
           setOnKol(true);
-          onKolSearch();
+          // onKolSearch();
+          onKolList();
         } else {
           const res = await onLogin();
-          res && onKolSearch();
+          res && onKolList();
+          // res && onKolSearch();
         }
         break;
     }
