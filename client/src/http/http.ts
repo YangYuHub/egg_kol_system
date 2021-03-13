@@ -16,8 +16,9 @@ axios.interceptors.request.use(
     const token = localStorage.getItem('kol_token');
     console.log(token);
     config.headers = {
-      'Content-Type': 'application/json',
-      'x-access-token': token,
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'x-access-token':
+        ' eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImp0aSI6InNoaW5nMDIifQ.eyJpc3MiOiJzdXNwbi5jb20iLCJhdWQiOiJzdXNwbi5jb20iLCJqdGkiOiJzaGluZzAyIiwiaWF0IjoxNjE1NTE3MDk2LCJ1aWQiOjE2MH0.VnnCjyE6QP08lm8EUK9oN55E8_FtwfaFcVWJxrO7u9Q',
     };
     return config;
   },

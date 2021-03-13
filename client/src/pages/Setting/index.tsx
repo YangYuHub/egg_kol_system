@@ -6,16 +6,20 @@ import {
   getKols,
   login,
   kol_list,
+  kol_baseinfo,
 } from '@/services/celebrity';
 import { PageContainer } from '@ant-design/pro-layout';
 import { Avatar, Badge, Button, Card, Col, List, message, Progress, Row, Skeleton } from 'antd';
 import React, { useState } from 'react';
+import { datas } from './data';
 import styles from './index.less';
+import ExportJsonExcel from 'js-export-excel'; //excel表格导出
 
 const Setting: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [kolPercent, setKolPercent] = useState(0);
   const [onKol, setOnKol] = useState(false);
+  const [kolBaseinfo, setKolBaseinfo] = useState<any>([]);
   const [params, setParams] = useState<KolParams>({
     page: 1,
     per_page: 40,
@@ -66,6 +70,9 @@ const Setting: React.FC = () => {
           // res && onKolSearch();
         }
         break;
+      case 'OK':
+        onBase();
+        break;
     }
   };
 
@@ -80,9 +87,87 @@ const Setting: React.FC = () => {
     }
   };
 
+  const onKolBaseInfo = async (id: string) => {
+    const res: any = await kol_baseinfo(id);
+    if (res.status === 'success') {
+      setKolBaseinfo([
+        ...kolBaseinfo,
+        {
+          id: res.data.id,
+          name: res.data.name,
+          whatsapp: res.data.whatsapp,
+          email: res.data.email,
+          mobile: res.data.mobile,
+          private_contact: res.data.private_contact,
+          youtube_video_list: res.data.youtube_video_list,
+        },
+      ]);
+    }
+  };
+
+  const onBase = async () => {
+    // const ids = datas.map((item) => item.id);
+    const ids = [135838];
+    ids.forEach((item) => {
+      setTimeout(() => {
+        onKolBaseInfo(item.toString());
+      }, 1000);
+    });
+    // console.log(kolBaseinfo);
+    // exportExcel(kolBaseinfo);
+  };
+
+  const exportExcel = () => {
+    const datas = kolBaseinfo;
+    let option: any = {};
+
+    let dataTable = []; //新建数组放数据
+
+    console.log(datas);
+
+    if (datas) {
+      for (const data of datas) {
+        console.log(data);
+
+        if (data) {
+          let obj = {
+            id: data.classid,
+
+            name: data.classname,
+          };
+
+          dataTable.push(obj);
+        }
+      }
+    }
+
+    console.log(dataTable);
+
+    option.fileName = 'yb'; //文件名
+
+    option.datas = [
+      {
+        sheetData: dataTable, //数据
+
+        sheetName: '班级信息', //sheet名字 // sheetFilter: [dataTable.id, dataTable.name],//列过滤 // sheetFilter 列过滤(只有在 data 为 object 下起作用)(可有可无)
+
+        sheetHeader: ['id', '名称', 'whatsapp', '邮箱', '移动电话', '私人联系方式', 'youtube地址'], //// 第一行
+      },
+    ];
+
+    var toExcel = new ExportJsonExcel(option);
+
+    toExcel.saveExcel(); //保存
+  };
+
   return (
     <PageContainer>
       <div className={styles.container}>
+        <Card>
+          <Button type="primary" onClick={exportExcel}>
+            导出
+          </Button>
+        </Card>
         <Card style={{ marginTop: '24px' }}>
           <List
             className="demo-loadmore-list"
@@ -90,7 +175,7 @@ const Setting: React.FC = () => {
             itemLayout="horizontal"
             dataSource={[
               { title: 'Kol', description: '点击开始爬取Kol数据', percent: kolPercent },
-              { title: 'Kol1', description: '点击开始爬取Kol数据', percent: 0 },
+              { title: 'OK', description: '点击开始爬取Kol数据', percent: 0 },
               { title: 'Kol2', description: '点击开始爬取Kol数据', percent: 100 },
             ]}
             renderItem={(item) => (

@@ -1,5 +1,8 @@
 import * as http from '../http/http';
 import { request } from 'umi';
+import qs from 'qs';
+import axios from 'axios';
+import { json } from 'express';
 
 export type LoginParamsType = {
   username: string;
@@ -72,6 +75,35 @@ export function kol_login(params: LoginType) {
 
 export function kol_list(params: KolParams) {
   return http.get('/admin_api/kol/serarch', params);
+}
+
+export function kol_baseinfo(params: string) {
+  console.log(params);
+  const s = { user_id: Number(params) };
+  // console.log(qs.stringify(s));
+  // return http.post('admin_api/kol/baseinfo', qs.stringify(s));
+  const res = new FormData();
+  res.append('user_id', params);
+
+  var myDataObj = s;
+  var formData = new FormData();
+  for (var key in myDataObj) {
+    formData.append(key, myDataObj[key]);
+  }
+
+  console.log(formData);
+  return http.post('admin_api/kol/baseinfo', qs.stringify({ user_id: params }));
+  const options: any = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'x-access-token':
+        ' eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImp0aSI6InNoaW5nMDIifQ.eyJpc3MiOiJzdXNwbi5jb20iLCJhdWQiOiJzdXNwbi5jb20iLCJqdGkiOiJzaGluZzAyIiwiaWF0IjoxNjE1NTE3MDk2LCJ1aWQiOjE2MH0.VnnCjyE6QP08lm8EUK9oN55E8_FtwfaFcVWJxrO7u9Q',
+    },
+    data: qs.stringify({ user_id: params }),
+    url: 'https://api.kolzhipin.com/admin_api/kol/baseinfo',
+  };
+  return axios(options);
 }
 
 export function login(params: LoginType) {
