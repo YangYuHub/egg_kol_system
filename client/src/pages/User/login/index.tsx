@@ -72,7 +72,6 @@ const Login: React.FC = () => {
 
   return (
     <div className={styles.container}>
-      <span>1</span>
       <div className={styles.lang}>{SelectLang && <SelectLang />}</div>
       <div className={styles.content}>
         <div className={styles.top}>
