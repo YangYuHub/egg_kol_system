@@ -81,7 +81,7 @@ const Login: React.FC = () => {
               <span className={styles.title}>Ant Design</span>
             </Link>
           </div>
-          <div className={styles.desc}>Ant Design 是西湖区最具影响力的 Web 设计规范</div>
+          <div className={styles.desc}> Ant Design 是西湖区最具影响力的 Web 设计规范</div>
         </div>
 
         <div className={styles.main}>
