@@ -51,4 +51,5 @@ export default {
   'menu.editor.koni': '拓扑编辑器',
   'menu.kolytb': 'YB列表',
   'menu.setting': '设置',
+  'menu.institutions': '网红代理',
 };

@@ -28,6 +28,12 @@
     component: './Kol',
   },
   {
+    path: '/institutions',
+    name: 'institutions',
+    icon: 'smile',
+    component: './Institutions',
+  },
+  {
     path: '/setting',
     name: 'setting',
     icon: 'smile',
