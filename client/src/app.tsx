@@ -22,11 +22,11 @@ export async function getInitialState(): Promise<{
   const fetchUserInfo = async () => {
     try {
       const currentUser = localStorage.getItem('user') as API.CurrentUser;
-      console.log(currentUser);
+      history.push('/');
       return currentUser;
     } catch (error) {
-      history.push('/user/login');
-      //
+      // history.push('/user/login');
+      history.push('/');
     }
     return undefined;
   };
@@ -53,9 +53,9 @@ export const layout: RunTimeLayoutConfig = ({ initialState }) => {
     onPageChange: () => {
       const { location } = history;
       // 如果没有登录，重定向到 login
-      if (!initialState?.currentUser && location.pathname !== '/user/login') {
-        history.push('/user/login');
-      }
+      // if (!initialState?.currentUser && location.pathname !== '/user/login') {
+      //   history.push('/user/login');
+      // }
     },
     menuHeaderRender: undefined,
     // 自定义 403 页面
@@ -107,26 +107,25 @@ const errorHandler = (error: ResponseError) => {
 
 const authHeaderInterceptor = (url: string, options: RequestOptionsInit) => {
   //判断不需要传token的接口
-
-  const ignorePathList = ['api/user/login', 'api/public/login', 'api/public/getKols'];
-  if (!ignorePathList.includes(url)) {
-    const currentUser = localStorage.getItem('user') as API.CurrentUser;
-    const authHeader = { Authorization: 'Bearer ' + currentUser.token };
-    return {
-      url: `${API_URL}${url}`,
-      options: { ...options, interceptors: true, headers: authHeader },
-    };
-  } else {
-    return {
-      url: `${API_URL}${url}`,
-      options: { ...options },
-    };
-  }
+  // const ignorePathList = ['api/user/login', 'api/public/login', 'api/public/getKols'];
+  // if (!ignorePathList.includes(url)) {
+  //   const currentUser = localStorage.getItem('user') as API.CurrentUser;
+  //   const authHeader = { Authorization: 'Bearer ' + currentUser.token };
+  //   return {
+  //     url: `${API_URL}${url}`,
+  //     options: { ...options, interceptors: true, headers: authHeader },
+  //   };
+  // } else {
+  //   return {
+  //     url: `${API_URL}${url}`,
+  //     options: { ...options },
+  //   };
+  // }
 };
 
 export const request: RequestConfig = {
   errorHandler,
-  requestInterceptors: [authHeaderInterceptor],
+  // requestInterceptors: [authHeaderInterceptor],
   //响应后拦截
   responseInterceptors: [
     async (response) => {

@@ -53,16 +53,17 @@ const Login: React.FC = () => {
     setSubmitting(true);
     try {
       // 登录
-      const msg = await loginAsync({ ...values });
-      if (msg.status === 200) {
-        localStorage.setItem('user', msg.data);
-        message.success('登录成功！');
-        await fetchUserInfo();
-        goto();
-        return;
-      }
+      // const msg = await loginAsync({ ...values });
+      // if (msg.status === 200) {
+      //   localStorage.setItem('user', msg.data);
+      //   message.success('登录成功！');
+      //   await fetchUserInfo();
+      //   goto();
+      //   return;
+      // }
       // 如果失败去设置用户错误信息
-      setUserLoginState(msg);
+      // setUserLoginState(msg);
+      goto();
     } catch (error) {
       message.error('登录失败，请重试！');
     }
