@@ -26,6 +26,7 @@ export async function getInitialState(): Promise<{
       return currentUser;
     } catch (error) {
       history.push('/user/login');
+      //
     }
     return undefined;
   };
