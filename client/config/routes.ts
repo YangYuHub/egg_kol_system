@@ -55,6 +55,21 @@
     ],
   },
   {
+    path: '/clue',
+    name: 'cluepool',
+    icon: 'crown',
+    access: 'canAdmin',
+    component: './MyClue',
+    routes: [
+      {
+        path: '/clue/myclue',
+        name: 'myclue',
+        icon: 'smile',
+        component: './MyClue',
+      },
+    ],
+  },
+  {
     name: 'list.table-list',
     icon: 'table',
     path: '/list',
