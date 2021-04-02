@@ -52,4 +52,7 @@ export default {
   'menu.kolytb': 'YB列表',
   'menu.setting': '设置',
   'menu.institutions': '网红代理',
+  'menu.cluepool': '线索管理_私有池',
+  'menu.cluepool.myclue': '我的线索',
+  'menu.cluepool.clueing': '跟进中线索',
 };
