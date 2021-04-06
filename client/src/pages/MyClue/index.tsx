@@ -1,7 +1,7 @@
 import styles from './index.less'
 import React from 'react';
 import { PageContainer } from '@ant-design/pro-layout';
-import { Button, Card, Cascader, Col, DatePicker, Form, Input, InputNumber, Row, Select, Space } from 'antd';
+import { Button, Card, Cascader, Col, DatePicker, Form, Input, InputNumber, Row, Select, Space, Table } from 'antd';
 import Assembly from '../../components/Commonpublic/index';
 import { LoginOutlined } from '@ant-design/icons';
 
@@ -70,6 +70,26 @@ const MyClue: React.FC = () => {
   const onFinish = ()=>{
   }
 
+  const dataSource:object[] = [];
+  
+  const columns = [
+    {
+      title: '姓名',
+      dataIndex: 'name',
+      key: 'name',
+    },
+    {
+      title: '年龄',
+      dataIndex: 'age',
+      key: 'age',
+    },
+    {
+      title: '住址',
+      dataIndex: 'address',
+      key: 'address',
+    },
+  ];
+
   return (
     <PageContainer>
       <div  className = {styles.Topbox}>
@@ -98,7 +118,7 @@ const MyClue: React.FC = () => {
         </Form>
       </Card>
       <Card style={{marginTop:'24px'}}>
-        
+        <Table  bordered dataSource={dataSource} columns={columns} />
       </Card>
     </PageContainer>
   );
