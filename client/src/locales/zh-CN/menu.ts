@@ -55,4 +55,5 @@ export default {
   'menu.cluepool': '线索管理_私有池',
   'menu.cluepool.myclue': '我的线索',
   'menu.cluepool.clueing': '跟进中线索',
+  'menu.custom':'我的客户'
 };

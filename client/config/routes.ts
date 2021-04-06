@@ -34,6 +34,12 @@
     component: './Institutions',
   },
   {
+    path: '/custom',
+    name: 'custom',
+    icon: 'smile',
+    component: './Custom',
+  },
+  {
     path: '/setting',
     name: 'setting',
     icon: 'smile',

@@ -40,7 +40,7 @@ create table `clue`(
     `member_id` bigint default null comment '客户ID',
     `remark_by_member` varchar(100) default null comment '备注客户',
     `source_user_id` int default null comment '线索来源ID',
-    `source_user_type` varchar(20) default null comment '线索来源： 商务添加、网站客户、SEM添加、渠道客户',
+    `source_user_type` varchar(20) default null comment '渠道类型： 商务添加、网站客户、SEM添加、渠道客户',
     `status` varchar(20) default null comment '线索状态： 新建、分配商务已跟进、分配商务待跟进、已立项、无效线索（无需求）、非本渠道的线索、已签合同、已结算佣金、无法联系、已完成/已结案、待确认',
 ) engine = InnoDB default charset = utf8 comment = '线索信息表';
 --客户表--
@@ -49,8 +49,11 @@ create table `member`(
     `account` varchar(30) default null comment '账号/手机号码',
     `name` varchar(30) default null comment '客户名',
     `wechat` varchar(30) default null comment '微信',
-    `source_user_type` varchar(30) default null comment '',
+    `source_user_type` varchar(30) default null comment '渠道',
+    `industry` varchar(30) default null comment '行业',
+    `company_name` varchar(50) default null comment '公司名称',
 ) engine = InnoDB default charset = utf8 comment = '客户信息表';
+
 --公司表--
 create table `company`(
     `id` bigint default null comment 'ID',
@@ -74,4 +77,10 @@ create table `clue_company`(
     `clue_id` bigint default null comment '客户ID',
     `company_id` bigint default null comment '公司ID',
 ) engine = InnoDB default charset = utf8 comment = '线索公司信息表';
-
+--渠道表--
+create table `channel`(
+    `id` bigint default null comment 'ID',
+    `name` varchar(20) default null comment '渠道名称',
+    `channel_type` varchar(15) default null comment '渠道类型：合同流水、流水分成',
+    `info` varchar(100) default null comment '渠道简介',
+) engine = InnoDB default charset = utf8 comment = '渠道信息表';
