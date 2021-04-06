@@ -70,6 +70,27 @@
     ],
   },
   {
+    path: '/custom',
+    name: 'costom',
+    icon: 'crown',
+    access: 'canAdmin',
+    // component: './Custom',
+    routes: [
+      {
+        path: '/custom/list',
+        name: 'costomList',
+        icon: 'smile',
+        component: './Custom/list',
+      },
+      {
+        path: '/custom/details',
+        name: 'costomDetails',
+        icon: 'smile',
+        component: './Custom/details',
+      },
+    ],
+  },
+  {
     name: 'list.table-list',
     icon: 'table',
     path: '/list',
