@@ -127,13 +127,13 @@ export const request: RequestConfig = {
   errorHandler,
   // requestInterceptors: [authHeaderInterceptor],
   //响应后拦截
-  responseInterceptors: [
-    async (response) => {
-      const resp = await response.clone().json();
-      if (resp.status !== 200) {
-        return Promise.reject(resp);
-      }
-      return resp;
-    },
-  ],
+  // responseInterceptors: [
+  //   async (response) => {
+  //     const resp = await response.clone().json();
+  //     if (resp.status !== 200) {
+  //       return Promise.reject(resp);
+  //     }
+  //     return resp;
+  //   },
+  // ],
 };
