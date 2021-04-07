@@ -22,13 +22,11 @@ import {
   Select,
 } from 'antd';
 import { PageContainer } from '@ant-design/pro-layout';
-import { localStorage } from '../../utils/storage';
 import Kols from './components/Kols';
 import { DownOutlined, UpOutlined } from '@ant-design/icons';
 
 const { Option } = Select;
 const Kol: React.FC = () => {
-  const [submitting, setSubmitting] = useState(false);
   const [params, setParams] = useState<KolParams>({
     page: 1,
     per_page: 40,
