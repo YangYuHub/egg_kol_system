@@ -1,11 +1,12 @@
 import styles from './index.less'
-import React from 'react';
+import React, { useState } from 'react';
 import { PageContainer } from '@ant-design/pro-layout';
-import { Button, Card, Cascader, Col, DatePicker, Form, Input, InputNumber, Row, Select, Space, Table } from 'antd';
-import Assembly from '../../components/Commonpublic/index';
+import { Button, Card, Col, DatePicker, Form, Input, Row, Select, Space, Table } from 'antd';
+import Assembly from '../../../components/Commonpublic/index';
 import { LoginOutlined } from '@ant-design/icons';
+import AddModal from './component/addModal'
 
-const MyClue: React.FC = () => {
+const Custom: React.FC = () => {
   const assemblyData = [
     { icon: <LoginOutlined />, color: 'red', name: '新建', mainnum: 1 },
     { icon: <LoginOutlined />, color: 'red', name: '新建', mainnum: 1 },
@@ -15,6 +16,9 @@ const MyClue: React.FC = () => {
     { icon: <LoginOutlined />, color: 'red', name: '新建', mainnum: 1 },
   ];
   const [form] = Form.useForm();
+
+  //添加弹窗flag
+  const [isModalVisible, setisModalVisible] = useState(false)
 
   //from表单数据
   const getfrom = ()=>{
@@ -72,23 +76,17 @@ const MyClue: React.FC = () => {
 
   const dataSource:object[] = [];
   
-  const columns = [
-    {
-      title: '姓名',
-      dataIndex: 'name',
-      key: 'name',
-    },
-    {
-      title: '年龄',
-      dataIndex: 'age',
-      key: 'age',
-    },
-    {
-      title: '住址',
-      dataIndex: 'address',
-      key: 'address',
-    },
-  ];
+  const columns:object[] = [];
+
+  //添加客户
+  const addCustom = ()=>{
+    setisModalVisible(true);
+  }
+
+  //弹窗方法 
+  const addCustomFlag = (falg:boolean)=>{
+    setisModalVisible(falg);
+  }
 
   return (
     <PageContainer>
@@ -110,8 +108,11 @@ const MyClue: React.FC = () => {
               <Button type="primary" htmlType="submit">
                 查询
               </Button>
-              <Button  style={{ margin: '0 8px' }} type="ghost" htmlType="submit">
-                添加代理
+              <Button style={{ margin: '0 8px' }} type="primary" htmlType="submit">
+                重置
+              </Button>
+              <Button   type="ghost" onClick={addCustom}>
+                新增客户
               </Button>
             </Col>
           </Row>
@@ -119,9 +120,13 @@ const MyClue: React.FC = () => {
       </Card>
       <Card style={{marginTop:'24px'}}>
         <Table  bordered dataSource={dataSource} columns={columns} />
+
       </Card>
+
+      <AddModal isModalVisible={isModalVisible} addCustom={addCustomFlag}/>
     </PageContainer>
   );
 };
 
-export default MyClue;
+
+export default Custom;
