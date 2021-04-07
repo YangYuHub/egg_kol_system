@@ -89,7 +89,7 @@ create table `celebrity_agent`(
     `name` varchar(20) default null comment '渠道名称',
 ) engine = InnoDB default charset = utf8 comment = '网红代理表';
 --项目表--
-create table `celebrity_agent`(
+create table `product`(
     `id` bigint default null comment 'ID',
     `countryName` varchar(30) default null comment '国家/地区',
     `period_name` varchar(8) default null comment '期数',
@@ -105,4 +105,31 @@ create table `celebrity_agent`(
     `influ_num` int default null comment '需要的博主数量',
     `reference_link` varchar(150) default null comment '参考链接',
     `reference_document` varchar(150) default null comment '参考文件链接',
+    `remark` varchar(150) default null comment '网红备注',
+    `special_remark` varchar(150) default null comment '特殊备注',
+    `status` int default null comment '项目状态',
 ) engine = InnoDB default charset = utf8 comment = '项目表';
+--项目网红要求--
+create table `product_celebrity`(
+    `id` bigint default null comment 'ID',
+    `product_id` bigint default null comment '项目ID',
+    `countryName` varchar(30) default null comment '国家/地区',
+    `location` varchar(30) default null comment '分布位置',
+    `fans_mix` int default null comment '粉丝数量最小值',
+    `fans_max` int default null comment '粉丝数量最大值',
+    `celebrity_type` varchar(30) default null comment '网红类别',
+    `form` varchar(30) default null comment '合作形式',
+    `platform` varchar(30) default null comment '合作平台',
+) engine = InnoDB default charset = utf8 comment = '项目网红要求表';
+--项目流水--
+create table `product_flows`(
+    `id` bigint default null comment 'ID',
+    `product_id` bigint default null comment '项目ID',
+    `type` varchar(10) default null comment '款项类型',
+    `summary` varchar(40) default null comment '摘要',
+    `payment` int default null comment '金额',
+    `bank_account` int default null comment '银行账号',
+    `comment` varchar(30) default null comment '备注',
+    `created_at` varchar(50) default null comment '添加款项时间',
+    `play_time` varchar(50) default null comment '打款时间',
+) engine = InnoDB default charset = utf8 comment = '项目流水';
