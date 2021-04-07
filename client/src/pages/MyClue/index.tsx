@@ -1,31 +1,17 @@
 import styles from './index.less';
 import React from 'react';
 import { PageContainer } from '@ant-design/pro-layout';
-import {
-  Button,
-  Card,
-  Cascader,
-  Col,
-  DatePicker,
-  Form,
-  Input,
-  InputNumber,
-  Row,
-  Select,
-  Space,
-  Table,
-} from 'antd';
-import Assembly from '../../components/Commonpublic/index';
+import { Button, Card, Col, DatePicker, Form, Input, Row, Select, Space, Table } from 'antd';
 import { LoginOutlined } from '@ant-design/icons';
 
 const MyClue: React.FC = () => {
   const assemblyData = [
+    { icon: <LoginOutlined />, color: 'magenta', name: '新建', mainnum: 1 },
     { icon: <LoginOutlined />, color: 'red', name: '新建', mainnum: 1 },
-    { icon: <LoginOutlined />, color: 'red', name: '新建', mainnum: 1 },
-    { icon: <LoginOutlined />, color: 'red', name: '新建', mainnum: 0 },
-    { icon: <LoginOutlined />, color: 'red', name: '新建', mainnum: 1 },
-    { icon: <LoginOutlined />, color: 'red', name: '新建', mainnum: 1 },
-    { icon: <LoginOutlined />, color: 'red', name: '新建', mainnum: 1 },
+    { icon: <LoginOutlined />, color: 'volcano', name: '新建', mainnum: 0 },
+    { icon: <LoginOutlined />, color: 'orange', name: '新建', mainnum: 1 },
+    { icon: <LoginOutlined />, color: 'lime', name: '新建', mainnum: 1 },
+    { icon: <LoginOutlined />, color: 'gold', name: '新建', mainnum: 1 },
   ];
   const [form] = Form.useForm();
 
@@ -103,7 +89,7 @@ const MyClue: React.FC = () => {
 
   const topContent = (props: any) => (
     <Col span={4}>
-      <Row className={styles.content} style={{ backgroundColor: props.color }}>
+      <Row className={`${styles.content} ${styles[props.color]}`}>
         <Col span={8} className={styles.icon}>
           {props.icon}
         </Col>
