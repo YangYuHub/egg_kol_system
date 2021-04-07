@@ -1,7 +1,20 @@
-import styles from './index.less'
+import styles from './index.less';
 import React from 'react';
 import { PageContainer } from '@ant-design/pro-layout';
-import { Button, Card, Cascader, Col, DatePicker, Form, Input, InputNumber, Row, Select, Space, Table } from 'antd';
+import {
+  Button,
+  Card,
+  Cascader,
+  Col,
+  DatePicker,
+  Form,
+  Input,
+  InputNumber,
+  Row,
+  Select,
+  Space,
+  Table,
+} from 'antd';
 import Assembly from '../../components/Commonpublic/index';
 import { LoginOutlined } from '@ant-design/icons';
 
@@ -17,61 +30,59 @@ const MyClue: React.FC = () => {
   const [form] = Form.useForm();
 
   //from表单数据
-  const getfrom = ()=>{
+  const getfrom = () => {
     return (
       <div>
         <Row gutter={24}>
           <Col span={4}>
             <Form.Item name="search" label="">
               <Space direction="vertical">
-                <DatePicker style={{width:'249px'}} onChange={onChangeData} placeholder='线索发布时间' />
+                <DatePicker
+                  style={{ width: '249px' }}
+                  onChange={onChangeData}
+                  placeholder="线索发布时间"
+                />
               </Space>
             </Form.Item>
           </Col>
           <Col span={4}>
             <Form.Item name="search" label="">
-              <Select placeholder='线索来源'>
-                
-              </Select>
+              <Select placeholder="线索来源"></Select>
             </Form.Item>
           </Col>
           <Col span={4}>
             <Form.Item name="search" label="">
-              <Input placeholder='客户名称'/>
+              <Input placeholder="客户名称" />
             </Form.Item>
           </Col>
           <Col span={4}>
             <Form.Item name="search" label="">
-              <Input  placeholder="公司名称" />
+              <Input placeholder="公司名称" />
             </Form.Item>
           </Col>
           <Col span={4}>
             <Form.Item name="search" label="">
-              <Input placeholder='手机/微信'/>
+              <Input placeholder="手机/微信" />
             </Form.Item>
           </Col>
           <Col span={4}>
             <Form.Item name="search" label="">
-              <Select placeholder='线索状态'>
-
-              </Select>
+              <Select placeholder="线索状态"></Select>
             </Form.Item>
           </Col>
         </Row>
       </div>
-    )
-  }
+    );
+  };
 
   //创建时间
-  const onChangeData = (time:any, timeString:any)=>{
-  }
+  const onChangeData = (time: any, timeString: any) => {};
 
   //from表单成功回调
-  const onFinish = ()=>{
-  }
+  const onFinish = () => {};
 
-  const dataSource:object[] = [];
-  
+  const dataSource: object[] = [];
+
   const columns = [
     {
       title: '姓名',
@@ -90,13 +101,25 @@ const MyClue: React.FC = () => {
     },
   ];
 
+  const topContent = (props: any) => (
+    <Col span={4}>
+      <Row className={styles.content} style={{ backgroundColor: props.color }}>
+        <Col span={8} className={styles.icon}>
+          {props.icon}
+        </Col>
+        <Col span={16}>
+          <div className={styles.right}>
+            <div>{props.mainnum}</div>
+            <div>{props.name}</div>
+          </div>
+        </Col>
+      </Row>
+    </Col>
+  );
+
   return (
     <PageContainer>
-      <div  className = {styles.Topbox}>
-      {assemblyData.map((item,index)=>{
-        return <Assembly key={index} {...item}/>
-      })}
-      </div>
+      <Row gutter={[8, 8]}>{assemblyData.map((item: any) => topContent(item))}</Row>
       <Card>
         <Form
           form={form}
@@ -110,15 +133,15 @@ const MyClue: React.FC = () => {
               <Button type="primary" htmlType="submit">
                 查询
               </Button>
-              <Button  style={{ margin: '0 8px' }} type="ghost" htmlType="submit">
+              <Button style={{ margin: '0 8px' }} type="ghost" htmlType="submit">
                 添加代理
               </Button>
             </Col>
           </Row>
         </Form>
       </Card>
-      <Card style={{marginTop:'24px'}}>
-        <Table  bordered dataSource={dataSource} columns={columns} />
+      <Card style={{ marginTop: '24px' }}>
+        <Table bordered dataSource={dataSource} columns={columns} />
       </Card>
     </PageContainer>
   );

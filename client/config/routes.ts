@@ -37,7 +37,7 @@
     path: '/custom',
     name: 'custom',
     icon: 'smile',
-    component: './Custom',
+    component: './Custom/list',
   },
   {
     path: '/setting',
