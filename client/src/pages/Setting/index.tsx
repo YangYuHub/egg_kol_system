@@ -9,9 +9,8 @@ import {
   kol_baseinfo,
 } from '@/services/celebrity';
 import { PageContainer } from '@ant-design/pro-layout';
-import { Avatar, Badge, Button, Card, Col, List, message, Progress, Row, Skeleton } from 'antd';
+import { Avatar, Button, Card, List, message, Progress } from 'antd';
 import React, { useState } from 'react';
-import { datas } from './data';
 import styles from './index.less';
 import ExportJsonExcel from 'js-export-excel'; //excel表格导出
 

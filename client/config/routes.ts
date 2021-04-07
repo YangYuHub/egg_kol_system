@@ -79,8 +79,6 @@
     path: '/custom',
     name: 'costom',
     icon: 'crown',
-    access: 'canAdmin',
-    // component: './Custom',
     routes: [
       {
         path: '/custom/list',
