@@ -53,7 +53,6 @@ create table `member`(
     `industry` varchar(30) default null comment '行业',
     `company_name` varchar(50) default null comment '公司名称',
 ) engine = InnoDB default charset = utf8 comment = '客户信息表';
-
 --公司表--
 create table `company`(
     `id` bigint default null comment 'ID',
@@ -84,3 +83,26 @@ create table `channel`(
     `channel_type` varchar(15) default null comment '渠道类型：合同流水、流水分成',
     `info` varchar(100) default null comment '渠道简介',
 ) engine = InnoDB default charset = utf8 comment = '渠道信息表';
+--网红代理表--
+create table `celebrity_agent`(
+    `id` bigint default null comment 'ID',
+    `name` varchar(20) default null comment '渠道名称',
+) engine = InnoDB default charset = utf8 comment = '网红代理表';
+--项目表--
+create table `celebrity_agent`(
+    `id` bigint default null comment 'ID',
+    `countryName` varchar(30) default null comment '国家/地区',
+    `period_name` varchar(8) default null comment '期数',
+    `product_name` varchar(30) default null comment '产品名',
+    `product_type` varchar(30) default null comment '产品类型',
+    `product_url` varchar(130) default null comment '产品链接',
+    `price` int default null comment '产品单价',
+    `put_money` varchar(30) default null comment '预算金额（美元）',
+    `grade` varchar(2) default null comment '等级',
+    `intention` varchar(10) default null comment '合作意向',
+    `priority` varchar(5) default null comment '项目优先级',
+    `advertise_time` varchar(5) default null comment '广告发布时间',
+    `influ_num` int default null comment '需要的博主数量',
+    `reference_link` varchar(150) default null comment '参考链接',
+    `reference_document` varchar(150) default null comment '参考文件链接',
+) engine = InnoDB default charset = utf8 comment = '项目表';
