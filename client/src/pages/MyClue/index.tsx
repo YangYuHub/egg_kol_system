@@ -22,13 +22,11 @@ const MyClue: React.FC = () => {
         <Row gutter={24}>
           <Col span={4}>
             <Form.Item name="search" label="">
-              <Space direction="vertical">
-                <DatePicker
-                  style={{ width: '249px' }}
-                  onChange={onChangeData}
-                  placeholder="线索发布时间"
-                />
-              </Space>
+              <DatePicker
+                style={{width:'100%'}}
+                onChange={onChangeData}
+                placeholder="线索发布时间"
+              />
             </Form.Item>
           </Col>
           <Col span={4}>
@@ -69,23 +67,7 @@ const MyClue: React.FC = () => {
 
   const dataSource: object[] = [];
 
-  const columns = [
-    {
-      title: '姓名',
-      dataIndex: 'name',
-      key: 'name',
-    },
-    {
-      title: '年龄',
-      dataIndex: 'age',
-      key: 'age',
-    },
-    {
-      title: '住址',
-      dataIndex: 'address',
-      key: 'address',
-    },
-  ];
+  const columns: object[] = [];
 
   const topContent = (props: any) => (
     <Col span={4}>
