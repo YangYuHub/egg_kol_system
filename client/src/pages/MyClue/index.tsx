@@ -7,11 +7,11 @@ import { LoginOutlined } from '@ant-design/icons';
 const MyClue: React.FC = () => {
   const assemblyData = [
     { icon: <LoginOutlined />, color: 'magenta', name: '新建', mainnum: 1 },
-    { icon: <LoginOutlined />, color: 'red', name: '新建', mainnum: 1 },
+    { icon: <LoginOutlined />, color: 'red',     name: '新建', mainnum: 1 },
     { icon: <LoginOutlined />, color: 'volcano', name: '新建', mainnum: 0 },
-    { icon: <LoginOutlined />, color: 'orange', name: '新建', mainnum: 1 },
-    { icon: <LoginOutlined />, color: 'lime', name: '新建', mainnum: 1 },
-    { icon: <LoginOutlined />, color: 'gold', name: '新建', mainnum: 1 },
+    { icon: <LoginOutlined />, color: 'orange',  name: '新建', mainnum: 1 },
+    { icon: <LoginOutlined />, color: 'lime',    name: '新建', mainnum: 1 },
+    { icon: <LoginOutlined />, color: 'gold',    name: '新建', mainnum: 1 },
   ];
   const [form] = Form.useForm();
 
@@ -105,7 +105,7 @@ const MyClue: React.FC = () => {
 
   return (
     <PageContainer>
-      <Row gutter={[8, 8]}>{assemblyData.map((item: any) => topContent(item))}</Row>
+      <Row gutter={[16, 16]}>{assemblyData.map((item: any) => topContent(item))}</Row>
       <Card>
         <Form
           form={form}

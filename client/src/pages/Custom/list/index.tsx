@@ -88,13 +88,25 @@ const Custom: React.FC = () => {
     setisModalVisible(falg);
   }
 
+  const topContent = (props: any) => (
+    <Col span={4}>
+      <Row className={`${styles.content} ${styles[props.color]}`}>
+        <Col span={8} className={styles.icon}>
+          {props.icon}
+        </Col>
+        <Col span={16}>
+          <div className={styles.right}>
+            <div>{props.mainnum}</div>
+            <div>{props.name}</div>
+          </div>
+        </Col>
+      </Row>
+    </Col>
+  );
+
   return (
     <PageContainer>
-      <div  className = {styles.Topbox}>
-      {assemblyData.map((item,index)=>{
-        return <Assembly key={index} {...item}/>
-      })}
-      </div>
+      <Row gutter={[16, 16]}>{assemblyData.map((item: any) => topContent(item))}</Row>
       <Card>
         <Form
           form={form}

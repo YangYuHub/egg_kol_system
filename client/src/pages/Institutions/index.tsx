@@ -1,7 +1,9 @@
+import styles from './index.less'
 import React from 'react';
 import { PageContainer } from '@ant-design/pro-layout';
 import { Card, Button, Col, Form, Input, Row, Select, DatePicker, Space, Cascader, InputNumber, Table } from 'antd';
 import Column from 'antd/lib/table/Column';
+
 
 const Institutions: React.FC = () => {
   const [form] = Form.useForm();
@@ -15,6 +17,14 @@ const Institutions: React.FC = () => {
   //创建时间
   const onChangeData = (time:any, timeString:any)=>{
     
+  }
+
+  const numberInput = ()=>{
+    return (
+      <div className={styles.numberInput}>
+        <InputNumber placeholder='网红数量' onChange={onChange}/>_<InputNumber/>
+      </div>
+    )
   }
   //from表单数据
   const getfrom = ()=>{
@@ -47,7 +57,7 @@ const Institutions: React.FC = () => {
           </Col>
           <Col span={4}>
             <Form.Item name="search" label="">
-              <InputNumber placeholder='网红数量' onChange={onChange}/> - <InputNumber/>
+              {numberInput()}
             </Form.Item>
           </Col>
           <Col span={4}>
