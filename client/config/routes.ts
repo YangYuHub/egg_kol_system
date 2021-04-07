@@ -33,12 +33,7 @@
     icon: 'smile',
     component: './Institutions',
   },
-  {
-    path: '/custom',
-    name: 'custom',
-    icon: 'smile',
-    component: './Custom/list',
-  },
+
   {
     path: '/setting',
     name: 'setting',
@@ -80,7 +75,7 @@
     name: 'costom',
     icon: 'crown',
     access: 'canAdmin',
-    // component: './Custom',
+    component: './Custom/list',
     routes: [
       {
         path: '/custom/list',

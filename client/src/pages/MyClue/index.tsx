@@ -1,9 +1,10 @@
 import styles from './index.less';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { PageContainer } from '@ant-design/pro-layout';
 import { Button, Card, Col, DatePicker, Form, Input, Row, Select, Space, Table } from 'antd';
 import { LoginOutlined } from '@ant-design/icons';
-
+import { getOne } from '@/services/user'
+ 
 const MyClue: React.FC = () => {
   const assemblyData = [
     { icon: <LoginOutlined />, color: 'magenta', name: '新建', mainnum: 1 },
@@ -69,8 +70,8 @@ const MyClue: React.FC = () => {
 
   const columns: object[] = [];
 
-  const topContent = (props: any) => (
-    <Col span={4}>
+  const topContent = (props:any , index:number) => (
+    <Col span={4} key={index}>
       <Row className={`${styles.content} ${styles[props.color]}`}>
         <Col span={8} className={styles.icon}>
           {props.icon}
@@ -85,9 +86,15 @@ const MyClue: React.FC = () => {
     </Col>
   );
 
+  useEffect(() => {
+    getOne().then((res) => {
+      console.log(res);
+    })
+  }, [])
+
   return (
     <PageContainer>
-      <Row gutter={[16, 16]}>{assemblyData.map((item: any) => topContent(item))}</Row>
+      <Row gutter={[16, 16]}>{assemblyData.map((item: any,index:number) => topContent(item,index))}</Row>
       <Card>
         <Form
           form={form}

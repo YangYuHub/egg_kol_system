@@ -34,4 +34,7 @@ declare namespace API {
     extra: any;
     status: string;
   };
+  export type NoticeOneData = {
+    data:string;
+  };
 }
